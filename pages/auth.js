@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "../utils/supabaseClient";
+import { supabase } from "../src/utils/supabaseClient";
 
 export default function Auth() {
   const [email, setEmail] = useState("");
@@ -47,3 +47,5 @@ export default function Auth() {
     </div>
   );
 }
+
+
