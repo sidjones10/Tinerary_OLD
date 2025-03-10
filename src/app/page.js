@@ -1,3 +1,26 @@
+"use client";  // Add this at the very top
+
+import { useEffect, useState } from "react";
+import { supabase } from "@/utils/supabaseClient";
+import { useRouter } from "next/router";
+
+export default function Page() {
+  const [data, setData] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    // Example: Fetch data when the component mounts
+    async function fetchData() {
+      let { data, error } = await supabase.from("your_table").select("*");
+      if (!error) setData(data);
+    }
+
+    fetchData();
+  }, []);
+
+  return <div>{data ? JSON.stringify(data) : "Loading..."}</div>;
+}
+
 import Image from "next/image";
 
 export default function Home() {
