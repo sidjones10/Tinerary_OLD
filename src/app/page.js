@@ -15,7 +15,7 @@ export default function Home() {
     const checkUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
-        router.push("/auth"); // Redirect if not logged in
+        router.push("/login"); // Redirect if not logged in
       } else {
         setUser(user);
       }
