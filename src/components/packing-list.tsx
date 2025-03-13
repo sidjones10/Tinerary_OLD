@@ -115,7 +115,7 @@ export default function PackingList() {
   const addItem = () => {
     if (newItemName.trim()) {
       const newItem: PackingItem = {
-        id: Date.now().toString(),
+        id: useMemo(() => Date.now().toString(), [])
         name: newItemName.trim(),
         category: newItemCategory,
         packed: false,

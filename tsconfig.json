@@ -2,13 +2,13 @@
     "compilerOptions": {
       "target": "ESNext",
       "module": "ESNext",
-      "moduleResolution": "node16",
+      "moduleResolution": "bundler",
       "jsx": "preserve",
       "esModuleInterop": true,
       "strict": true,
-      "baseUrl": "./",
+      "baseUrl": ".",
       "paths": {
-        "@/*": ["src/*"]
+        "@/*": ["./src/*"]
       },
       "lib": ["dom", "dom.iterable", "esnext"],
       "allowJs": true,
@@ -17,6 +17,7 @@
       "incremental": true,
       "resolveJsonModule": true,
       "isolatedModules": true,
+      "types": ["next", "node", "shadcn-ui", "lucide-react"], // Ensure this includes "next"
       "plugins": [
         {
           "name": "next"
@@ -28,8 +29,7 @@
       ".next/types/**/*.ts",
       "**/*.ts",
       "**/*.tsx",
-      "node_modules/tailwindcss/**/*.d.ts"  // Include Tailwind types here
-    ],
+, "next.config.js"    ],
     "exclude": [
       "node_modules"
     ]
