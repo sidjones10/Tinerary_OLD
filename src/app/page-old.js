@@ -99,3 +99,20 @@ export default function Home() {
   );
 }
 
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
+
+console.log("SUPABASE TEST:", supabase);
+
+console.log("SUPABASE URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
+console.log("SUPABASE ANON KEY:", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+
+import Home from "./home/home";
+
+export default function Page() {
+  return <Home />;
+}

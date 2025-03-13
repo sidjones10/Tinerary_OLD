@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Check, Plus, X } from "lucide-react"
+import React from 'react'
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"

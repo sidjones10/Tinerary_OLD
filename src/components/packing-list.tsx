@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import * as Dialog from '@radix-ui/react-dialog'
+import {Dialog} from '@radix-ui/react-dialog'
 
 
 import { useState } from "react"
@@ -42,7 +42,7 @@ interface PackingCategory {
   color: string
 }
 
-export function PackingList() {
+export default function PackingList() {
   const [newItemName, setNewItemName] = useState("")
   const [newItemCategory, setNewItemCategory] = useState("clothing")
 

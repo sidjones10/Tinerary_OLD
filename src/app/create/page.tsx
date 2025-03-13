@@ -1,8 +1,11 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/router"
 import Link from "next/link"
 import { ArrowLeft, Calendar, Clock, Lightbulb, MapPin, Plus, Trash2 } from "lucide-react"
+import { createTrip } from "@/utils/createTrip"; // Import the createTrip function
+
 
 import { Button } from "@/components/ui/button"
 import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -19,9 +22,11 @@ import { PrivacySettings } from "@/components/privacy-settings"
 import { GradientCard } from "@/components/ui-gradient-card"
 
 export default function CreatePage() {
+  const router = useRouter()
   const [type, setType] = useState<"event" | "trip">("event")
   const [activities, setActivities] = useState([{ id: 1, time: "", title: "", location: "", description: "" }])
   const [showAiRecommendations, setShowAiRecommendations] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const addActivity = () => {
     const newId = activities.length > 0 ? Math.max(...activities.map((a) => a.id)) + 1 : 1
@@ -31,7 +36,7 @@ export default function CreatePage() {
   const removeActivity = (id: number) => {
     setActivities(activities.filter((activity) => activity.id !== id))
   }
-
+  
   return (
     <div className="container px-4 py-6 md:py-10">
       <Link href="/" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6">

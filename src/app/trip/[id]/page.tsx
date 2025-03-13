@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useParams } from "next/navigation"
 import Link from "next/link"
 import {
   ArrowLeft,
@@ -31,14 +32,29 @@ import { Input } from "@/components/ui/input"
 import { GradientCard } from "@/components/ui-gradient-card"
 import { ExpenseEstimator } from "@/components/expense-estimator"
 import { TripPhotoGallery } from "@/components/trip-photo-gallery"
-import { PackingList } from "@/components/packing-list"
+import  PackingList  from "@/components/packing-list"
 import { ItineraryCustomizer } from "@/components/itinerary-customizer"
 import { ItinerarySharingOptions } from "@/components/itinerary-sharing"
 
-export default function TripPage({ params }: { params: { id: string } }) {
+export default function TripPage() {
+  const params = useParams<{ id: string }>()
+  const [tripId, setTripId] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchParams = async () => {
+      if (params && params.id) {
+        setTripId(params.id)
+      }
+    }
+
+    fetchParams()
+  }, [params])
+
+  if (!tripId) return <div>Loading...</div>
+
   // Sample data - in a real app, this would come from a database
   const trip = {
-    id: params.id,
+    id: params?.id || "",
     title: "Weekend in NYC",
     type: "trip",
     date: "Mar 15-17, 2025",
@@ -326,7 +342,7 @@ export default function TripPage({ params }: { params: { id: string } }) {
             <TabsContent value="people" className="mt-6 space-y-6">
               <GradientCard>
                 <CardHeader>
-                  <CardTitle>Trip Squad</CardTitle>
+                  <CardTitle>Tinerary</CardTitle>
                   <CardDescription>People collaborating on this trip</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -510,5 +526,9 @@ export default function TripPage({ params }: { params: { id: string } }) {
       </div>
     </div>
   )
+}
+
+function customUseEffect(arg0: () => void, arg1: ({ id: string } | null)[]) {
+  throw new Error("Function not implemented.")
 }
 

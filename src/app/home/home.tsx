@@ -3,16 +3,18 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import { User } from "@supabase/supabase-js"; // Import the User type
 
 export default function Home() {
-  const [user, setUser] = useState(null);
-  const [data, setData] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [data, setData] = useState<any[] | null>(null);
 
   useEffect(() => {
     const getUser = async () => {
       try {
-        const { data: { user } } = await supabase.auth.getSession();
-        setUser(user || null);
+        const { data: { user }, error } = await supabase.auth.getUser();
+          if (error) throw error;
+          setUser(user || null);
       } catch (error) {
         console.error("Error fetching user:", error);
       }
@@ -40,7 +42,7 @@ export default function Home() {
     <ErrorBoundary>
       <div>
         {user?.email ? `Welcome ${user.email}` : "No user found"}
-        {data?.length > 0 ? JSON.stringify(data) : "No data available"}
+        {data && data.length > 0 ? JSON.stringify(data) : "No data available"}
       </div>
     </ErrorBoundary>
   );
